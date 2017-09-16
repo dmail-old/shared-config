@@ -4,7 +4,7 @@ const prettierConfig = require("./src/prettier")
 
 const namedConfig = {
 	eslint: eslintConfig,
-	prettierConfig: prettierConfig
+	prettier: prettierConfig
 }
 
 const config = (name, ...overrides) =>
