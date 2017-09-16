@@ -1,0 +1,8 @@
+{
+  "name": "shared-config",
+  "version": "1.0.0",
+  "licence": "MIT",
+  "dependencies": {
+    "deepmerge": "^1.5.1"
+  }
+}
