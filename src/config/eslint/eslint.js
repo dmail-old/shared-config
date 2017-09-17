@@ -311,7 +311,7 @@ const ruleOverrides = {
 	// ],
 	"no-eval": ["off"],
 	semi: ["error", "never"],
-	"brace-style": ["error", "stroustrup"],
+	"brace-style": ["off", "stroustrup"],
 	"arrow-parens": [
 		"error",
 		"always"
