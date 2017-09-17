@@ -3,11 +3,6 @@
 	"version": "1.0.0",
 	"licence": "MIT",
 	"dependencies": {
-		"babel-eslint": "^8.0.0",
-		"babel-preset-env": "^1.6.0",
-		"eslint": "^3.19.0",
-		"eslint-plugin-import": "^2.7.0",
-		"prettier": "^1.7.0",
 		"deepmerge": "^1.5.1"
 	}
 }

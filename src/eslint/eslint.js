@@ -1,4 +1,5 @@
 const parser = "babel-eslint"
+exports.parser = parser
 const parserOptions = {
 	ecmaVersion: 6,
 	sourceType: "module",
@@ -409,7 +410,7 @@ const rules = Object.assign(
 exports.rules = rules
 
 const eslintConfig = {
-	parser,
+	// parser,
 	parserOptions,
 	env,
 	globals,
