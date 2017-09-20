@@ -1,5 +1,6 @@
 const parser = "babel-eslint"
 exports.parser = parser
+
 const parserOptions = {
 	ecmaVersion: 6,
 	sourceType: "module",
@@ -8,21 +9,21 @@ const parserOptions = {
 		experimentalObjectRestSpread: true
 	}
 }
+
 const env = {
 	browser: true,
 	node: true,
 	es6: true
 }
+
 const globals = {
 	// "jsenv": true
 }
-const plugins = ["import"]
-const settings = {
-	"import/extensions": [".js", ".jsx"]
-	// "flowtype": {
-	//   "onlyFilesWithFlowAnnotation": true
-	// }
-}
+
+const plugins = []
+const settings = {}
+const rules = {}
+
 const defaultRules = {
 	"comma-dangle": [2, "never"],
 	"no-cond-assign": 2,
@@ -259,6 +260,8 @@ const defaultRules = {
 		}
 	]
 }
+Object.assign(rules, defaultRules)
+
 const ruleOverrides = {
 	indent: [
 		"warn",
@@ -314,7 +317,7 @@ const ruleOverrides = {
 	"brace-style": ["off", "stroustrup"],
 	"arrow-parens": [
 		"error",
-		"always"
+		"as-needed"
 		// {
 		//     "requireForBlockBody": true
 		// }
@@ -330,83 +333,114 @@ const ruleOverrides = {
 		}
 	]
 }
-const importRules = {
-	"import/default": ["error"],
-	"import/no-unresolved": [
-		"error",
-		{
-			commonjs: true,
-			amd: false
-		}
-	],
-	"import/named": ["error"],
-	"import/namespace": [
-		"error",
-		{
-			allowComputed: true
-		}
-	],
-	"import/no-absolute-path": ["error"],
-	"import/no-dynamic-require": ["error"],
-	"import/export": ["error"],
-	"import/no-named-as-default": ["warn"],
-	"import/first": ["warn"],
-	"import/no-duplicates": ["warn"],
-	"import/newline-after-import": ["warn"],
-	"import/max-dependencies": [
-		"warn",
-		{
-			max: 10
-		}
-	]
-	// "import/no-anonymous-default-export": [
-	//     "error",
-	//     {
-	//         "allowArray": true,
-	//         "allowArrowFunction": false,
-	//         "allowAnonymousClass": false,
-	//         "allowAnonymousFunction": false,
-	//         "allowLiteral": true,
-	//         "allowObject": true
-	//     }
-	// ],
-}
-const flowRules = {
-	"flowtype/boolean-style": [2, "boolean"],
-	"flowtype/define-flow-type": 1,
-	"flowtype/delimiter-dangle": [2, "never"],
-	"flowtype/generic-spacing": [2, "never"],
-	"flowtype/no-primitive-constructor-types": 2,
-	"flowtype/no-types-missing-file-annotation": ["off"],
-	"flowtype/no-weak-types": ["off"],
-	"flowtype/object-type-delimiter": [2, "comma"],
-	"flowtype/require-parameter-type": ["off"],
-	"flowtype/require-return-type": [
-		"off",
-		"always",
-		{
-			annotateUndefined: "never"
-		}
-	],
-	"flowtype/require-valid-file-annotation": ["off"],
-	"flowtype/semi": ["off", "always"],
-	"flowtype/space-after-type-colon": [2, "always"],
-	"flowtype/space-before-generic-bracket": [2, "never"],
-	"flowtype/space-before-type-colon": [2, "never"],
-	"flowtype/type-id-match": [2, "^([A-Z][a-z0-9]+)+Type$"],
-	"flowtype/union-intersection-spacing": [2, "always"],
-	"flowtype/use-flow-type": 1,
-	"flowtype/valid-syntax": 1
-}
-exports.flowRules = flowRules
+Object.assign(rules, ruleOverrides)
 
-const rules = Object.assign(
-	{},
-	defaultRules,
-	ruleOverrides,
-	importRules
-	// ...flowRules
-)
+const importPlugin = {
+	"name": "import",
+	"enabled": true,
+	"settings": {
+		"extensions": [".js", ".jsx"]
+	},
+	"rules": {
+		"default": [
+			"error"
+		],
+		"no-unresolved": [
+			"error",
+			{
+				commonjs: true,
+				amd: false,
+				caseSensitive: false,
+			}
+		],
+		"named": [
+			"error"
+		],
+		"namespace": [
+			"error",
+			{
+				allowComputed: true
+			}
+		],
+		"no-absolute-path": ["error"],
+		"no-dynamic-require": ["error"],
+		"export": ["error"],
+		"no-named-as-default": ["warn"],
+		"first": ["warn"],
+		"no-duplicates": ["warn"],
+		"newline-after-import": ["warn"],
+		"max-dependencies": [
+			"warn",
+			{
+				max: 10
+			}
+		]
+		// "no-anonymous-default-export": [
+		//     "error",
+		//     {
+		//         "allowArray": true,
+		//         "allowArrowFunction": false,
+		//         "allowAnonymousClass": false,
+		//         "allowAnonymousFunction": false,
+		//         "allowLiteral": true,
+		//         "allowObject": true
+		//     }
+	}
+}
+
+const flowtypePlugin = {
+	"name": "flow",
+	// disabled for now, when flow will allow to have untyped module boundaries I will reconsider
+	// https://github.com/facebook/flow/issues/4540
+	"enabled": false,
+	"settings": {
+		"onlyFilesWithFlowAnnotation": true
+	},
+	"rules": {
+		"boolean-style": [2, "boolean"],
+		"define-flow-type": 1,
+		"delimiter-dangle": [2, "never"],
+		"generic-spacing": [2, "never"],
+		"no-primitive-constructor-types": 2,
+		"no-types-missing-file-annotation": ["off"],
+		"no-weak-types": ["off"],
+		"object-type-delimiter": [2, "comma"],
+		"require-parameter-type": ["off"],
+		"require-return-type": [
+			"off",
+			"always",
+			{
+				annotateUndefined: "never"
+			}
+		],
+		"require-valid-file-annotation": ["off"],
+		"semi": ["off", "always"],
+		"space-after-type-colon": [2, "always"],
+		"space-before-generic-bracket": [2, "never"],
+		"space-before-type-colon": [2, "never"],
+		"type-id-match": [2, "^([A-Z][a-z0-9]+)+Type$"],
+		"union-intersection-spacing": [2, "always"],
+		"use-flow-type": 1,
+		"valid-syntax": 1
+	}
+}
+
+const availablePlugins = [importPlugin, flowtypePlugin]
+const enabledPlugins = availablePlugins.filter(plugin => plugin.enabled)
+const prefixKeys = (object, prefix) => {
+	const prefixedObject = {}
+	Object.keys(object).forEach(key => {
+		prefixedObject[prefix + key] = object[key]
+	})
+	return prefixedObject
+}
+
+enabledPlugins.forEach(({ name, settings: pluginSettings, rules: pluginRules }) => {
+	plugins.push(name)
+	settings[name] = pluginSettings
+	Object.assign(rules, prefixKeys(pluginRules, `${name}/`))
+})
+
 exports.rules = rules
 
 const eslintConfig = {

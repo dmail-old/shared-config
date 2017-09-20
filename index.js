@@ -6,10 +6,10 @@ DONT ADD ANY DEPENDENCY TO THIS (deepmerge is an exception because does not cras
 and this folder don't have local eslint nor local prettier, tant pis
 */
 
-const deepMerge = require("./src/deepMerge")
-const babelConfig = require("./src/config/babel")
-const eslintConfig = require("./src/config/eslint")
-const prettierConfig = require("./src/config/prettier")
+const deepMerge = require("./src/deepMerge/index.js")
+const babelConfig = require("./src/config/babel/index.js")
+const eslintConfig = require("./src/config/eslint/index.js")
+const prettierConfig = require("./src/config/prettier/index.js")
 
 const namedConfig = {
 	babel: babelConfig,
@@ -17,6 +17,5 @@ const namedConfig = {
 	prettier: prettierConfig
 }
 
-const config = (name, ...overrides) =>
-	deepMerge.all([namedConfig[name], ...overrides], { clone: true })
+const config = (name, ...overrides) => deepMerge.all([namedConfig[name], ...overrides], { clone: true })
 exports.config = config
