@@ -17,5 +17,5 @@ const namedConfig = {
 	prettier: prettierConfig
 }
 
-const config = (name, ...overrides) => deepMerge.all([namedConfig[name], ...overrides], { clone: true })
+const config = (name, ...overrides) => deepMerge.all([namedConfig[name], {}, ...overrides], { clone: true })
 exports.config = config
