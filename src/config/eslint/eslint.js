@@ -36,7 +36,7 @@ const defaultRules = {
 	"no-empty-character-class": 2,
 	"no-ex-assign": 2,
 	"no-extra-boolean-cast": 2,
-	"no-extra-semi": ['off'],
+	"no-extra-semi": ["off"],
 	"no-func-assign": 2,
 	"no-inner-declarations": 2,
 	"no-invalid-regexp": 2,
@@ -199,7 +199,7 @@ const defaultRules = {
 	"one-var": [2, "never"],
 	"one-var-declaration-per-line": 2,
 	"operator-assignment": [2, "always"],
-	"operator-linebreak": [2, "after"],
+	"operator-linebreak": ["error", "after", { overrides: { "?": "ignore", ":": "ignore" } }],
 	"padded-blocks": [2, "never"],
 	"quote-props": [2, "as-needed"],
 	"semi-spacing": [
@@ -336,27 +336,23 @@ const ruleOverrides = {
 Object.assign(rules, ruleOverrides)
 
 const importPlugin = {
-	"name": "import",
-	"enabled": true,
-	"settings": {
-		"extensions": [".js", ".jsx"]
+	name: "import",
+	enabled: true,
+	settings: {
+		extensions: [".js", ".jsx"]
 	},
-	"rules": {
-		"default": [
-			"error"
-		],
+	rules: {
+		default: ["error"],
 		"no-unresolved": [
 			"error",
 			{
 				commonjs: true,
 				amd: false,
-				caseSensitive: false,
+				caseSensitive: false
 			}
 		],
-		"named": [
-			"error"
-		],
-		"namespace": [
+		named: ["error"],
+		namespace: [
 			"error",
 			{
 				allowComputed: true
@@ -364,9 +360,9 @@ const importPlugin = {
 		],
 		"no-absolute-path": ["error"],
 		"no-dynamic-require": ["error"],
-		"export": ["error"],
+		export: ["error"],
 		"no-named-as-default": ["warn"],
-		"first": ["warn"],
+		first: ["warn"],
 		"no-duplicates": ["warn"],
 		"newline-after-import": ["warn"],
 		"max-dependencies": [
@@ -389,14 +385,14 @@ const importPlugin = {
 }
 
 const flowtypePlugin = {
-	"name": "flow",
+	name: "flow",
 	// disabled for now, when flow will allow to have untyped module boundaries I will reconsider
 	// https://github.com/facebook/flow/issues/4540
-	"enabled": false,
-	"settings": {
-		"onlyFilesWithFlowAnnotation": true
+	enabled: false,
+	settings: {
+		onlyFilesWithFlowAnnotation: true
 	},
-	"rules": {
+	rules: {
 		"boolean-style": [2, "boolean"],
 		"define-flow-type": 1,
 		"delimiter-dangle": [2, "never"],
@@ -414,7 +410,7 @@ const flowtypePlugin = {
 			}
 		],
 		"require-valid-file-annotation": ["off"],
-		"semi": ["off", "always"],
+		semi: ["off", "always"],
 		"space-after-type-colon": [2, "always"],
 		"space-before-generic-bracket": [2, "never"],
 		"space-before-type-colon": [2, "never"],
