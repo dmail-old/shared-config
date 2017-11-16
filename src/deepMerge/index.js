@@ -53,9 +53,8 @@ function deepmerge(target, source, optionsArgument) {
 	} else if (sourceIsArray) {
 		var arrayMerge = options.arrayMerge || defaultArrayMerge
 		return arrayMerge(target, source, optionsArgument)
-	} else {
-		return mergeObject(target, source, optionsArgument)
 	}
+	return mergeObject(target, source, optionsArgument)
 }
 
 deepmerge.all = function deepmergeAll(array, optionsArgument) {

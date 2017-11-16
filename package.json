@@ -1,13 +1,13 @@
 {
 	"name": "@dmail/shared-config",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"license": "MIT",
 	"publishConfig": {
 		"access": "public"
 	},
 	"dependencies": {
-		"babel-eslint": "8.0.0",
-		"eslint": "3.19.0",
+		"babel-eslint": "8.0.2",
+		"eslint": "4.11.0",
 		"eslint-plugin-import": "2.6.0",
 		"prettier": "1.8.2"
 	}

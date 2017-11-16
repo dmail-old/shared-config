@@ -3,7 +3,7 @@ module.exports = function isMergeableObject(value) {
 }
 
 function isNonNullObject(value) {
-	return !!value && typeof value === "object"
+	return Boolean(value) && typeof value === "object"
 }
 
 function isNotSpecial(value) {
