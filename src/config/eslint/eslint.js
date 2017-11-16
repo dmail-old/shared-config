@@ -323,7 +323,7 @@ const ruleOverrides = {
 		// }
 	],
 	"comma-dangle": [
-		"error",
+		"off",
 		{
 			arrays: "only-multiline",
 			objects: "only-multiline",
