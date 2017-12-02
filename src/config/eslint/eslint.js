@@ -6,14 +6,14 @@ const parserOptions = {
 	sourceType: "module",
 	ecmaFeatures: {
 		jsx: true,
-		experimentalObjectRestSpread: true,
-	},
+		experimentalObjectRestSpread: true
+	}
 }
 
 const env = {
 	browser: true,
 	node: true,
-	es6: true,
+	es6: true
 }
 
 const globals = {
@@ -111,8 +111,8 @@ const defaultRules = {
 	"no-undef": [
 		2,
 		{
-			typeof: true,
-		},
+			typeof: true
+		}
 	],
 	"no-unused-vars": 2,
 	"no-use-before-define": [2, "nofunc"],
@@ -121,8 +121,8 @@ const defaultRules = {
 		2,
 		{
 			grouping: true,
-			allowCall: true,
-		},
+			allowCall: true
+		}
 	],
 	"no-new-require": 2,
 	"no-path-concat": 2,
@@ -133,21 +133,21 @@ const defaultRules = {
 		2,
 		"1tbs",
 		{
-			allowSingleLine: false,
-		},
+			allowSingleLine: false
+		}
 	],
 	camelcase: [
 		2,
 		{
-			properties: "always",
-		},
+			properties: "always"
+		}
 	],
 	"comma-spacing": [
 		2,
 		{
 			before: false,
-			after: true,
-		},
+			after: true
+		}
 	],
 	"comma-style": [2, "last"],
 	"computed-property-spacing": [2, "never"],
@@ -156,16 +156,16 @@ const defaultRules = {
 		2,
 		4,
 		{
-			SwitchCase: 1,
-		},
+			SwitchCase: 1
+		}
 	],
 	"jsx-quotes": 2,
 	"key-spacing": [
 		2,
 		{
 			beforeColon: false,
-			afterColon: true,
-		},
+			afterColon: true
+		}
 	],
 	"keyword-spacing": 2,
 	"linebreak-style": [2, "unix"],
@@ -174,8 +174,8 @@ const defaultRules = {
 		2,
 		{
 			newIsCap: true,
-			capIsNew: true,
-		},
+			capIsNew: true
+		}
 	],
 	"new-parens": 2,
 	"no-array-constructor": 2,
@@ -184,8 +184,8 @@ const defaultRules = {
 	"no-multiple-empty-lines": [
 		2,
 		{
-			max: 1,
-		},
+			max: 1
+		}
 	],
 	"no-nested-ternary": 2,
 	"no-negated-condition": 2,
@@ -206,8 +206,8 @@ const defaultRules = {
 		2,
 		{
 			before: false,
-			after: true,
-		},
+			after: true
+		}
 	],
 	semi: [2, "always"],
 	"space-before-blocks": [2, "always"],
@@ -218,16 +218,16 @@ const defaultRules = {
 		2,
 		"always",
 		{
-			markers: ["!"],
-		},
+			markers: ["!"]
+		}
 	],
 	"arrow-parens": [2, "as-needed"],
 	"arrow-spacing": [
 		2,
 		{
 			before: true,
-			after: true,
-		},
+			after: true
+		}
 	],
 	"constructor-super": 2,
 	"generator-star-spacing": [2, "both"],
@@ -244,9 +244,9 @@ const defaultRules = {
 		{
 			requireReturn: false,
 			prefer: {
-				returns: "return",
-			},
-		},
+				returns: "return"
+			}
+		}
 	],
 	"space-before-function-paren": [2, "never"],
 	"max-len": [
@@ -256,15 +256,15 @@ const defaultRules = {
 		{
 			ignoreComments: true,
 			ignoreUrls: true,
-			ignorePattern: "^\\s*var\\s.+=\\s.+\\/.*?\\/;$",
-		},
-	],
+			ignorePattern: "^\\s*var\\s.+=\\s.+\\/.*?\\/;$"
+		}
+	]
 }
 Object.assign(rules, defaultRules)
 
 const ruleOverrides = {
 	indent: [
-		"warn",
+		"error",
 		"tab",
 		// I don't want to force people identation width to be 2 or 4
 		// they decide how much space a tab char takes (2, 4, 100) in their environment
@@ -272,12 +272,12 @@ const ruleOverrides = {
 		// remote public version remains consistent
 		// (see http://stackoverflow.com/a/33831598)
 		{
-			SwitchCase: 1,
-		},
+			SwitchCase: 1
+		}
 	],
 	quotes: [
 		"off", // because painful when you swtich between ""``
-		"double", // because JSON requires it so facilitates it
+		"double" // because JSON requires it so facilitates it
 	],
 	"prefer-template": ["warn"],
 	/*
@@ -291,8 +291,8 @@ const ruleOverrides = {
 		{
 			keywords: false,
 			numbers: true,
-			unnecessary: false,
-		},
+			unnecessary: false
+		}
 	],
 	"no-warning-comments": ["off"],
 	/*
@@ -314,32 +314,46 @@ const ruleOverrides = {
 	// ],
 	"no-eval": ["off"],
 	semi: ["error", "never"],
-	"brace-style": ["off", "stroustrup"],
+	"brace-style": ["error", "stroustrup"],
 	"arrow-parens": [
 		"error",
-		"as-needed",
+		"as-needed"
 		// {
 		//     "requireForBlockBody": true
 		// }
 	],
 	"comma-dangle": [
-		"off",
+		"error", // because prettier
 		{
 			arrays: "only-multiline",
 			objects: "only-multiline",
 			imports: "only-multiline",
 			exports: "only-multiline",
-			functions: "only-multiline",
-		},
+			functions: "only-multiline"
+		}
 	],
+	"prefer-const": ["error", { destructuring: "all", ignoreReadBeforeAssign: true }]
 }
 Object.assign(rules, ruleOverrides)
+
+// disable some rules because of prettier
+;[
+	"arrow-parens",
+	"brace-style",
+	"indent",
+	"quotes",
+	"quote-props",
+	"comma-dangle",
+	"semi"
+].forEach(name => {
+	rules[name][0] = "off"
+})
 
 const importPlugin = {
 	name: "import",
 	enabled: true,
 	settings: {
-		extensions: [".js", ".jsx"],
+		extensions: [".js", ".jsx"]
 	},
 	rules: {
 		default: ["error"],
@@ -348,15 +362,15 @@ const importPlugin = {
 			{
 				commonjs: true,
 				amd: false,
-				caseSensitive: false,
-			},
+				caseSensitive: false
+			}
 		],
 		named: ["error"],
 		namespace: [
 			"error",
 			{
-				allowComputed: true,
-			},
+				allowComputed: true
+			}
 		],
 		"no-absolute-path": ["error"],
 		"no-dynamic-require": ["error"],
@@ -368,9 +382,9 @@ const importPlugin = {
 		"max-dependencies": [
 			"warn",
 			{
-				max: 10,
-			},
-		],
+				max: 10
+			}
+		]
 		// "no-anonymous-default-export": [
 		//     "error",
 		//     {
@@ -381,7 +395,7 @@ const importPlugin = {
 		//         "allowLiteral": true,
 		//         "allowObject": true
 		//     }
-	},
+	}
 }
 
 const flowtypePlugin = {
@@ -390,7 +404,7 @@ const flowtypePlugin = {
 	// https://github.com/facebook/flow/issues/4540
 	enabled: false,
 	settings: {
-		onlyFilesWithFlowAnnotation: true,
+		onlyFilesWithFlowAnnotation: true
 	},
 	rules: {
 		"boolean-style": [2, "boolean"],
@@ -406,8 +420,8 @@ const flowtypePlugin = {
 			"off",
 			"always",
 			{
-				annotateUndefined: "never",
-			},
+				annotateUndefined: "never"
+			}
 		],
 		"require-valid-file-annotation": ["off"],
 		semi: ["off", "always"],
@@ -417,8 +431,8 @@ const flowtypePlugin = {
 		"type-id-match": [2, "^([A-Z][a-z0-9]+)+Type$"],
 		"union-intersection-spacing": [2, "always"],
 		"use-flow-type": 1,
-		"valid-syntax": 1,
-	},
+		"valid-syntax": 1
+	}
 }
 
 const availablePlugins = [importPlugin, flowtypePlugin]
@@ -446,6 +460,6 @@ const eslintConfig = {
 	globals,
 	plugins,
 	settings,
-	rules,
+	rules
 }
 exports.config = eslintConfig
