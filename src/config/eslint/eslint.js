@@ -336,19 +336,6 @@ const ruleOverrides = {
 }
 Object.assign(rules, ruleOverrides)
 
-// disable some rules because of prettier
-;[
-	"arrow-parens",
-	"brace-style",
-	"indent",
-	"quotes",
-	"quote-props",
-	"comma-dangle",
-	"semi"
-].forEach(name => {
-	rules[name][0] = "off"
-})
-
 const importPlugin = {
 	name: "import",
 	enabled: true,
@@ -449,6 +436,92 @@ enabledPlugins.forEach(({ name, settings: pluginSettings, rules: pluginRules }) 
 	plugins.push(name)
 	settings[name] = pluginSettings
 	Object.assign(rules, prefixKeys(pluginRules, `${name}/`))
+})
+
+// disable some rules because of prettier
+// see https://github.com/prettier/eslint-config-prettier/blob/master/index.js
+;[
+	"array-bracket-newline",
+	"array-bracket-spacing",
+	"array-element-newline",
+	"arrow-parens",
+	"arrow-spacing",
+	"block-spacing",
+	"brace-style",
+	"comma-dangle",
+	"comma-spacing",
+	"comma-style",
+	"computed-property-spacing",
+	"curly",
+	"dot-location",
+	"eol-last",
+	"func-call-spacing",
+	"function-paren-newline",
+	"generator-star",
+	"generator-star-spacing",
+	"implicit-arrow-linebreak",
+	"indent",
+	"indent-legacy",
+	"jsx-quotes",
+	"key-spacing",
+	"keyword-spacing",
+	"lines-around-comment",
+	"max-len",
+	"multiline-ternary",
+	"newline-per-chained-call",
+	"new-parens",
+	"no-arrow-condition",
+	"no-comma-dangle",
+	"no-confusing-arrow",
+	"no-extra-parens",
+	"no-extra-semi",
+	"no-floating-decimal",
+	"no-mixed-operators",
+	"no-mixed-spaces-and-tabs",
+	"no-multi-spaces",
+	"no-multiple-empty-lines",
+	"no-reserved-keys",
+	"no-space-before-semi",
+	"no-spaced-func",
+	"no-tabs",
+	"no-trailing-spaces",
+	"no-unexpected-multiline",
+	"no-whitespace-before-property",
+	"no-wrap-func",
+	"nonblock-statement-body-position",
+	"object-curly-newline",
+	"object-curly-spacing",
+	"object-property-newline",
+	"one-var-declaration-per-line",
+	"operator-linebreak",
+	"padded-blocks",
+	"quotes",
+	"quote-props",
+	"rest-spread-spacing",
+	"semi",
+	"semi-spacing",
+	"semi-style",
+	"space-after-function-name",
+	"space-after-keywords",
+	"space-before-blocks",
+	"space-before-function-paren",
+	"space-before-function-parentheses",
+	"space-before-keywords",
+	"space-in-brackets",
+	"space-in-parens",
+	"space-infix-ops",
+	"space-return-throw-case",
+	"space-unary-ops",
+	"space-unary-word-ops",
+	"switch-colon-spacing",
+	"template-curly-spacing",
+	"template-tag-spacing",
+	"unicode-bom",
+	"wrap-iife",
+	"wrap-regex",
+	"yield-star-spacing",
+].forEach(name => {
+	rules[name][0] = "off"
 })
 
 exports.rules = rules
