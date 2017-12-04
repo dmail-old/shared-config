@@ -521,7 +521,9 @@ enabledPlugins.forEach(({ name, settings: pluginSettings, rules: pluginRules }) 
 	"wrap-regex",
 	"yield-star-spacing",
 ].forEach(name => {
-	rules[name][0] = "off"
+	if (name in rules) {
+		rules[name][0] = "off"
+	}
 })
 
 exports.rules = rules
