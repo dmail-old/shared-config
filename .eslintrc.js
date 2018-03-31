@@ -1,1 +1,1 @@
-module.exports = require("./index.js").config("eslint", {})
+module.exports = require("./index.js").config("eslint")

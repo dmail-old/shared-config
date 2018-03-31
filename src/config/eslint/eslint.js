@@ -215,7 +215,7 @@ const defaultRules = {
 	"space-infix-ops": 2,
 	"space-unary-ops": 2,
 	"spaced-comment": [
-		2,
+		"off",
 		"always",
 		{
 			markers: ["!"]
@@ -250,7 +250,7 @@ const defaultRules = {
 	],
 	"space-before-function-paren": [2, "never"],
 	"max-len": [
-		1,
+		"warn",
 		120,
 		4,
 		{
@@ -258,7 +258,10 @@ const defaultRules = {
 			ignoreUrls: true,
 			ignorePattern: "^\\s*var\\s.+=\\s.+\\/.*?\\/;$"
 		}
-	]
+	],
+	"prefer-rest-params": ["warn"],
+	"prefer-spread": ["warn"],
+	"object-shorthand": ["warn", "always"]
 }
 Object.assign(rules, defaultRules)
 
@@ -440,7 +443,7 @@ enabledPlugins.forEach(({ name, settings: pluginSettings, rules: pluginRules }) 
 
 // disable some rules because of prettier
 // see https://github.com/prettier/eslint-config-prettier/blob/master/index.js
-;[
+const rulesHandledByPrettier = [
 	"array-bracket-newline",
 	"array-bracket-spacing",
 	"array-element-newline",
@@ -519,8 +522,9 @@ enabledPlugins.forEach(({ name, settings: pluginSettings, rules: pluginRules }) 
 	"unicode-bom",
 	"wrap-iife",
 	"wrap-regex",
-	"yield-star-spacing",
-].forEach(name => {
+	"yield-star-spacing"
+]
+rulesHandledByPrettier.forEach(name => {
 	if (name in rules) {
 		rules[name][0] = "off"
 	}

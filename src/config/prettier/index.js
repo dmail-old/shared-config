@@ -1,1 +1,1 @@
-module.exports = require("./prettier.js").config
+Object.assign(module.exports, require("./prettier.js"))

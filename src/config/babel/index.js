@@ -1,1 +1,1 @@
-module.exports = require("./babel.js").config
+Object.assign(module.exports, require("./babel.js"))

@@ -1,1 +1,1 @@
-module.exports = require("./eslint.js").config
+Object.assign(module.exports, require("./eslint.js"))
