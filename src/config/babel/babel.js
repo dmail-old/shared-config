@@ -113,8 +113,11 @@ const createBabelOptions = ({ minify = false, moduleInput, moduleOutput } = {}) 
 	}
 
 	babelPlugins = babelPlugins.map(({ name, options }) => {
+		// eslint-disable-next-line import/no-dynamic-require
+		const pluginExports = require(`babel-plugin-${name}`)
+
 		return [
-			require(`babel-plugin-${name}`), // eslint-disable-line import/no-dynamic-require
+			pluginExports && pluginExports.__esModule ? pluginExports.default : pluginExports,
 			options
 		]
 	})
@@ -130,7 +133,7 @@ const createBabelOptions = ({ minify = false, moduleInput, moduleOutput } = {}) 
 
 const config = Object.assign(
 	createBabelOptions({
-		minfiy: false,
+		minify: false,
 		moduleInput: "es",
 		moduleOutput: "cjs"
 	}),
