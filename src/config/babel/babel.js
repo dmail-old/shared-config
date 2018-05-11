@@ -31,7 +31,7 @@ const defaultPlugins = {
 
 const modulePlugins = {
 	"transform-es2015-modules-commonjs": {},
-	"transform-es2015-module-systemjs": {},
+	"transform-es2015-modules-systemjs": {},
 	"transform-global-system-wrapper": {},
 	"transform-amd-system-wrapper": {},
 	"transform-async-to-generator": {},
@@ -68,7 +68,7 @@ const getModulePlugin = (input, output) => {
 	if (output === "systemjs") {
 		// https://github.com/ModuleLoader/es-module-loader/blob/master/docs/system-register-dynamic.md
 		if (input === "es") {
-			return "transform-es2015-module-systemjs"
+			return "transform-es2015-modules-systemjs"
 		}
 		if (input === "cjs") {
 			return "transform-cjs-system-wrapper"
