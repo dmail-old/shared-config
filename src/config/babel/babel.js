@@ -58,33 +58,33 @@ const minifyPlugins = {
 	"transform-undefined-to-void": {}
 }
 
-const getModulePlugin = (input, output) => {
-	if (output === "cjs") {
-		if (input === "es") {
+const getModuleTransformPlugin = (inputFormat, outputFormat) => {
+	if (outputFormat === "cjs") {
+		if (inputFormat === "es") {
 			return "transform-es2015-modules-commonjs"
 		}
-		throw new Error(`unexpected module ${input} input combined with ${output} output`)
+		throw new Error(`unexpected ${inputFormat} input format combined with ${outputFormat} output format`)
 	}
-	if (output === "systemjs") {
+	if (outputFormat === "systemjs") {
 		// https://github.com/ModuleLoader/es-module-loader/blob/master/docs/system-register-dynamic.md
-		if (input === "es") {
+		if (inputFormat === "es") {
 			return "transform-es2015-modules-systemjs"
 		}
-		if (input === "cjs") {
+		if (inputFormat === "cjs") {
 			return "transform-cjs-system-wrapper"
 		}
-		if (input === "amd") {
+		if (inputFormat === "amd") {
 			return "transform-amd-system-wrapper"
 		}
-		if (input === "global") {
+		if (inputFormat === "global") {
 			return "transform-global-system-wrapper"
 		}
-		throw new Error(`unexpected module ${input} input combined with ${output} output`)
+		throw new Error(`unexpected ${inputFormat} input format combined with ${outputFormat} output format`)
 	}
-	throw new Error(`unexpected module ${output} output`)
+	throw new Error(`unexpected ${outputFormat} output format`)
 }
 
-const createBabelOptions = ({ minify = false, moduleInput, moduleOutput } = {}) => {
+const createBabelOptions = ({ minify = false, inputModuleFormat, outputModuleFormat } = {}) => {
 	const plugins = Object.assign({}, defaultPlugins)
 
 	let compact = false
@@ -104,8 +104,8 @@ const createBabelOptions = ({ minify = false, moduleInput, moduleOutput } = {}) 
 			return { name, options: plugins[name] }
 		})
 
-	if (moduleOutput !== undefined && moduleOutput !== moduleInput) {
-		const modulePluginName = getModulePlugin(moduleInput, moduleOutput)
+	if (outputModuleFormat !== undefined && outputModuleFormat !== inputModuleFormat) {
+		const modulePluginName = getModuleTransformPlugin(inputModuleFormat, outputModuleFormat)
 		babelPlugins.unshift({
 			name: modulePluginName,
 			options: modulePlugins[modulePluginName]
@@ -134,8 +134,8 @@ const createBabelOptions = ({ minify = false, moduleInput, moduleOutput } = {}) 
 const config = Object.assign(
 	createBabelOptions({
 		minify: false,
-		moduleInput: "es",
-		moduleOutput: "cjs"
+		inputModuleFormat: "es",
+		outputModuleFormat: "cjs"
 	}),
 	{
 		ignore: ["node_modules", "dist"],
