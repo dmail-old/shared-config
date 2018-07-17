@@ -1,7 +1,53 @@
 // https://babeljs.io/docs/plugins/
 // https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-dynamic-import
 
-const defaultPlugins = {
+const modulePlugins = {
+	"transform-es2015-modules-commonjs": {},
+	"transform-es2015-modules-systemjs": {},
+	"transform-global-system-wrapper": {},
+	"transform-amd-system-wrapper": {},
+	"transform-async-to-generator": {},
+	"transform-cjs-system-wrapper": {}
+}
+
+const getModuleTransformPlugin = (inputFormat, outputFormat) => {
+	if (outputFormat === "cjs") {
+		if (inputFormat === "es") {
+			return modulePlugins["transform-es2015-modules-commonjs"]
+		}
+		throw new Error(`unexpected ${inputFormat} input format combined with ${outputFormat} output format`)
+	}
+	if (outputFormat === "systemjs") {
+		// https://github.com/ModuleLoader/es-module-loader/blob/master/docs/system-register-dynamic.md
+		if (inputFormat === "es") {
+			return modulePlugins["transform-es2015-modules-systemjs"]
+		}
+		if (inputFormat === "cjs") {
+			return modulePlugins["transform-cjs-system-wrapper"]
+		}
+		if (inputFormat === "amd") {
+			return modulePlugins["transform-amd-system-wrapper"]
+		}
+		if (inputFormat === "global") {
+			return modulePlugins["transform-global-system-wrapper"]
+		}
+		throw new Error(`unexpected ${inputFormat} input format combined with ${outputFormat} output format`)
+	}
+	throw new Error(`unexpected ${outputFormat} output format`)
+}
+
+const createModuleOptions = ({ inputModuleFormat, outputModuleFormat }) => {
+	if (outputModuleFormat !== undefined && outputModuleFormat !== inputModuleFormat) {
+		return {
+			plugins: [
+				getModuleTransformPlugin(inputModuleFormat, outputModuleFormat)
+			]
+		}
+	}
+	return {}
+}
+
+const syntaxPlugins = {
 	"check-es2015-constants": {},
 	"syntax-async-functions": {},
 	"transform-es2015-arrow-functions": {},
@@ -29,13 +75,12 @@ const defaultPlugins = {
 	"transform-regenerator": {}
 }
 
-const modulePlugins = {
-	"transform-es2015-modules-commonjs": {},
-	"transform-es2015-modules-systemjs": {},
-	"transform-global-system-wrapper": {},
-	"transform-amd-system-wrapper": {},
-	"transform-async-to-generator": {},
-	"transform-cjs-system-wrapper": {}
+const createSyntaxOptions = () => {
+	return {
+		plugins: Object.keys(syntaxPlugins).filter(name => Boolean(syntaxPlugins[name])).map(name => {
+			return { name, options: syntaxPlugins[name] }
+		})
+	}
 }
 
 const minifyPlugins = {
@@ -58,93 +103,61 @@ const minifyPlugins = {
 	"transform-undefined-to-void": {}
 }
 
-const getModuleTransformPlugin = (inputFormat, outputFormat) => {
-	if (outputFormat === "cjs") {
-		if (inputFormat === "es") {
-			return "transform-es2015-modules-commonjs"
-		}
-		throw new Error(`unexpected ${inputFormat} input format combined with ${outputFormat} output format`)
+const createMinifyOptions = () => {
+	return {
+		plugins: Object.keys(minifyPlugins).filter(name => Boolean(minifyPlugins[name])).map(name => {
+			return { name, options: syntaxPlugins[name] }
+		}),
+		compact: true,
+		comments: true,
+		minified: true,
 	}
-	if (outputFormat === "systemjs") {
-		// https://github.com/ModuleLoader/es-module-loader/blob/master/docs/system-register-dynamic.md
-		if (inputFormat === "es") {
-			return "transform-es2015-modules-systemjs"
-		}
-		if (inputFormat === "cjs") {
-			return "transform-cjs-system-wrapper"
-		}
-		if (inputFormat === "amd") {
-			return "transform-amd-system-wrapper"
-		}
-		if (inputFormat === "global") {
-			return "transform-global-system-wrapper"
-		}
-		throw new Error(`unexpected ${inputFormat} input format combined with ${outputFormat} output format`)
-	}
-	throw new Error(`unexpected ${outputFormat} output format`)
 }
 
-const createBabelOptions = ({ minify = false, inputModuleFormat, outputModuleFormat } = {}) => {
-	const plugins = Object.assign({}, defaultPlugins)
+const mergeBabelOptions = (...objects) => {
+	const options = objects.reduce((accumulator, object) => {
+		if (typeof object === undefined || object === null) {
+			return accumulator
+		}
+		return {
+			...accumulator,
+			...object,
+			presets: object.presets ? [...accumulator.presets, ...object.presets] : accumulator.presets,
+			plugins: object.plugins ? [...accumulator.plugins, ...object.plugins] : accumulator.plugins
+		}
+	}, {
+		presets: [],
+		plugins: []
+	})
 
-	let compact = false
-	let comments = false
-	let minified = false
-
-	if (minify) {
-		compact = true
-		comments = true
-		minified = true
-		Object.assign(plugins, minifyPlugins)
-	}
-
-	let babelPlugins = Object.keys(plugins)
-		.filter(name => Boolean(plugins[name]))
-		.map(name => {
-			return { name, options: plugins[name] }
-		})
-
-	if (outputModuleFormat !== undefined && outputModuleFormat !== inputModuleFormat) {
-		const modulePluginName = getModuleTransformPlugin(inputModuleFormat, outputModuleFormat)
-		babelPlugins.unshift({
-			name: modulePluginName,
-			options: modulePlugins[modulePluginName]
-		})
-	}
-
-	babelPlugins = babelPlugins.map(({ name, options }) => {
+	options.plugins = options.plugins.map(({ name, options }) => {
 		// eslint-disable-next-line import/no-dynamic-require
-		const pluginExports = require(`babel-plugin-${name}`)
+		// const pluginExports = require(`babel-plugin-${name}`) // I dont have to do this
 
 		return [
-			pluginExports && pluginExports.__esModule ? pluginExports.default : pluginExports,
+			name,
+			// pluginExports && pluginExports.__esModule ? pluginExports.default : pluginExports,
 			options
 		]
 	})
 
-	return {
-		presets: [],
-		plugins: babelPlugins,
-		compact,
-		comments,
-		minified
-	}
+	return options
 }
 
-const config = Object.assign(
-	createBabelOptions({
-		minify: false,
+const config = mergeBabelOptions(
+	createModuleOptions({
 		inputModuleFormat: "es",
 		outputModuleFormat: "cjs"
 	}),
+	createSyntaxOptions(),
 	{
 		ignore: ["node_modules", "dist"],
 		only: ["index.js", "index.test.js", "src/*", "bin/*"]
 	}
 )
 
-exports.minifyPlugins = minifyPlugins
-exports.defaultPlugins = defaultPlugins
-exports.modulePlugins = modulePlugins
-exports.createBabelOptions = createBabelOptions
+exports.createModuleOptions = createModuleOptions
+exports.createSyntaxOptions = createSyntaxOptions
+exports.createMinifyOptions = createMinifyOptions
+exports.mergeBabelOptions = mergeBabelOptions
 exports.config = config
