@@ -1,0 +1,5 @@
+package-lock.json
+package.json
+dist
+vscode-user
+vscode-workspace
