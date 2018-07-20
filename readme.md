@@ -47,5 +47,5 @@ module.exports = require("@dmail/shared-config/dist/babel.js").config
 ```
 
 But configuring babel using a `.js` file instead of `.rc` is not supported by babel 6.
-Unfortunately, at least one of the babel plugin used here are not compatible with babel 7.
+Unfortunately, at least one of the babel plugin used here is not compatible with babel 7.
 I forgot to list which ones, it would be great to do it so that we know what is preventing to move forward.
