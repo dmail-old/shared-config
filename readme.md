@@ -1,6 +1,6 @@
 # shared-config
 
-Share eslint, babel, prettier and vscode config amongst my projects
+Share configuration of eslint, babel, prettier and vscode config amongst projects
 
 # Usage
 
@@ -9,7 +9,7 @@ Add this in your `package.json`
 ```json
 {
   "devDependencies": {
-    "@dmail/shared-config": "5.2.0"
+    "@dmail/shared-config": "6.0.0"
   }
 }
 ```
@@ -40,6 +40,12 @@ Create `.babelrc` at the root of your project
 }
 ```
 
-Note: I would like to use [babel.config.js](https://babeljs.io/docs/en/next/babelconfigjs.html) but it requires babel 7+.
-Unfortunately some babel-plugin used here are still compatible only with babel 6.
-I forgot to list which ones, it would be great to do it so that we know what is preventing us to move forward.
+Note: I would like to use [babel.config.js](https://babeljs.io/docs/en/next/babelconfigjs.html) to be able to write
+
+```js
+module.exports = require("@dmail/shared-config/dist/babel.js").config
+```
+
+But configuring babel using a `.js` file instead of `.rc` is not supported by babel 6.
+Unfortunately, at least one of the babel plugin used here are not compatible with babel 7.
+I forgot to list which ones, it would be great to do it so that we know what is preventing to move forward.
