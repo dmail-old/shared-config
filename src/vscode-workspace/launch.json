@@ -21,7 +21,7 @@
       },
       "sourceMaps": true,
       "outputCapture": "std",
-      "skipFiles": ["node_modules/**"]
+      "skipFiles": ["node_modules/**", "<node_internals>/**/*.js"]
     },
     {
       "type": "node",
