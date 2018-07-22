@@ -20,7 +20,7 @@ export const blockScoping = {
 }
 
 export const classPlugin = {
-  name: "classes",
+  name: "transform-es2015-classes",
 }
 
 export const computedProperty = {
