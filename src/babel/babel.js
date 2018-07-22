@@ -4,6 +4,13 @@
 import { mergeArrayElements } from "../util.js"
 import { createModuleOptions } from "./options-module.js"
 import { createSyntaxOptions } from "./options-syntax.js"
+import { createMinifyOptions } from "./options-minify.js"
+
+export { createModuleOptions }
+
+export { createSyntaxOptions }
+
+export { createMinifyOptions }
 
 export const mergeOptions = (...objects) => {
   const options = objects.reduce(
