@@ -1,3 +1,17 @@
+// https://eslint.org/docs/rules/
+
+export const acessorPairs = {
+  name: "accessor-pairs",
+}
+
+export const arrayCallbackReturn = {
+  name: "array-callback-return",
+}
+
+export const blockScopedVar = {
+  name: "block-scoped-var",
+}
+
 export const commaDangle = {
   name: "comma-dangle",
   options: [
@@ -9,6 +23,39 @@ export const commaDangle = {
       functions: "only-multiline",
     },
   ],
+}
+
+export const curly = {
+  name: "curly",
+}
+
+export const defaultCase = {
+  name: "default-case",
+}
+
+export const dotNotation = {
+  name: "dot-notation",
+}
+
+export const dotLocation = {
+  name: "dot-location",
+  options: ["property"],
+}
+
+export const eqeqeq = {
+  name: "eqeqeq",
+}
+
+export const getterReturn = {
+  name: "getter-return",
+}
+
+export const guardForIn = {
+  name: "guard-for-in",
+}
+
+export const consistentReturn = {
+  name: "consistent-return",
 }
 
 export const noConditionalAssignement = {
@@ -107,43 +154,6 @@ export const noUnexpectedMultipleline = {
   name: "no-unexpected-multiline",
 }
 
-export const acessorPairs = {
-  name: "accessor-pairs",
-}
-
-export const arrayCallbackReturn = {
-  name: "array-callback-return",
-}
-
-export const blockScopedVar = {
-  name: "block-scoped-var",
-}
-
-export const curly = {
-  name: "curly",
-}
-
-export const defaultCase = {
-  name: "default-case",
-}
-
-export const dotNotation = {
-  name: "dot-notation",
-}
-
-export const dotLocation = {
-  name: "dot-location",
-  options: ["property"],
-}
-
-export const eqeqeq = {
-  name: "eqeqeq",
-}
-
-export const guardForIn = {
-  name: "guard-for-in",
-}
-
 export const noAlert = {
   name: "no-alert",
 }
@@ -225,6 +235,10 @@ export const noLoneBlock = {
 
 export const noLoopFunction = {
   name: "no-loop-func",
+}
+
+export const noMagicNumber = {
+  name: "no-magic-numbers",
 }
 
 export const noMultipleSpace = {
@@ -345,6 +359,10 @@ export const noLabelVar = {
 
 export const noShadowRestrictedName = {
   name: "no-shadow-restricted-names",
+}
+
+export const noUndefined = {
+  name: "no-undefined",
 }
 
 export const noUndefInit = {

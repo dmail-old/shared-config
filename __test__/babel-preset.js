@@ -1,1 +1,1 @@
-module.exports = require("../index.js").config("babel")
+module.exports = require("../dist/babel.js").config
