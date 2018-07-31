@@ -3,17 +3,25 @@
   "files.eol": "\n",
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
+  "files.defaultLanguage": "js",
+  "path-intellisense.extensionOnImport": true,
   "eslint.run": "onType",
   "git.confirmSync": false,
+  "git.enableSmartCommit": true,
   "editor.tabSize": 2,
-  "editor.minimap.enabled": true,
   "editor.formatOnSave": true,
+  "editor.minimap.enabled": true,
   "editor.minimap.renderCharacters": false,
   "editor.renderWhitespace": "boundary",
   "editor.renderControlCharacters": false,
-  "git.enableSmartCommit": true,
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 0,
   "workbench.panel.location": "bottom",
-  "path-intellisense.extensionOnImport": true,
-  "files.defaultLanguage": "js"
+  "workbench.iconTheme": "vs-seti",
+  // https://code.visualstudio.com/docs/getstarted/theme-color-reference#_status-bar-colors
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#333",
+    "statusBar.foreground": "#DDD",
+    "statusBar.debuggingBackground": "#cb6829",
+    "statusBar.debuggingForeground": "#FFF",
+  }
 }
