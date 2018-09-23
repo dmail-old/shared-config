@@ -40,12 +40,4 @@ Create `.babelrc` at the root of your project
 }
 ```
 
-Note: I would like to use [babel.config.js](https://babeljs.io/docs/en/next/babelconfigjs.html) to be able to write
-
-```js
-module.exports = require("@dmail/shared-config/dist/babel.js").config
-```
-
-But configuring babel using a `.js` file instead of `.rc` is not supported by babel 6.
-Unfortunately, at least one of the babel plugin used here is not compatible with babel 7.
-I forgot to list which ones, it would be great to do it so that we know what is preventing to move forward.
+Note: I plan to use [babel.config.js](https://babeljs.io/docs/en/next/babelconfigjs.html), this is tracked in https://github.com/dmail/shared-config/issues/10
