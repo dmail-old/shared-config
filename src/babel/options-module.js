@@ -1,15 +1,9 @@
-import {
-  transformAMDSystemWrapper,
-  transformCommonJSSystemWrapper,
-  transformES2015ModuleCommonJS,
-  transformES2015ModuleSystemJS,
-  transformGlobalSystemWrapper,
-} from "./plugins.js"
+import { transformModuleCommonJS, transformModuleSystemJS } from "./plugins.js"
 
 const getModuleTransformPlugin = (inputFormat, outputFormat) => {
   if (outputFormat === "cjs") {
     if (inputFormat === "es") {
-      return transformES2015ModuleCommonJS
+      return transformModuleCommonJS
     }
     throw new Error(
       `unexpected ${inputFormat} input format combined with ${outputFormat} output format`,
@@ -18,16 +12,7 @@ const getModuleTransformPlugin = (inputFormat, outputFormat) => {
   if (outputFormat === "systemjs") {
     // https://github.com/ModuleLoader/es-module-loader/blob/master/docs/system-register-dynamic.md
     if (inputFormat === "es") {
-      return transformES2015ModuleSystemJS
-    }
-    if (inputFormat === "cjs") {
-      return transformCommonJSSystemWrapper
-    }
-    if (inputFormat === "amd") {
-      return transformAMDSystemWrapper
-    }
-    if (inputFormat === "global") {
-      return transformGlobalSystemWrapper
+      return transformModuleSystemJS
     }
     throw new Error(
       `unexpected ${inputFormat} input format combined with ${outputFormat} output format`,

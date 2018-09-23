@@ -8,11 +8,7 @@ exports.build = ({ inputFile, outputFile }) => {
       babel({
         babelrc: false,
         exclude: "node_modules/**",
-        plugins: [
-          "babel-plugin-transform-object-rest-spread",
-          "babel-plugin-transform-es2015-spread",
-          "babel-plugin-external-helpers",
-        ],
+        plugins: ["@babel/plugin-proposal-object-rest-spread", "@babel/plugin-transform-spread"],
       }),
     ],
   })

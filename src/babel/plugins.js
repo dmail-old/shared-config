@@ -1,127 +1,107 @@
 // syntax
-export const checkES2015Constant = {
-  name: "check-es2015-constants",
-}
-
-export const asyncFunction = {
-  name: "syntax-async-functions",
-}
-
 export const arrowFunction = {
-  name: "transform-es2015-arrow-functions",
+  name: "@babel/transform-arrow-functions",
 }
 
 export const blockScopedFunction = {
-  name: "transform-es2015-block-scoped-functions",
+  name: "@babel/transform-block-scoped-functions",
 }
 
 export const blockScoping = {
-  name: "transform-es2015-block-scoping",
+  name: "@babel/transform-block-scoping",
 }
 
 export const classPlugin = {
-  name: "transform-es2015-classes",
+  name: "@babel/transform-classes",
 }
 
 export const computedProperty = {
-  name: "transform-es2015-computed-properties",
+  name: "@babel/transform-computed-properties",
 }
 
 export const destructuring = {
-  name: "transform-es2015-destructuring",
+  name: "@babel/transform-destructuring",
 }
 
 export const duplicateKeys = {
-  name: "transform-es2015-duplicate-keys",
+  name: "@babel/transform-duplicate-keys",
 }
 
 export const forOf = {
-  name: "transform-es2015-for-of",
+  name: "@babel/transform-for-of",
 }
 
 export const functionName = {
-  name: "transform-es2015-function-name",
+  name: "@babel/transform-function-name",
 }
 
 export const ES2015Literals = {
-  name: "transform-es2015-literals",
+  name: "@babel/transform-literals",
 }
 
 export const objectSuper = {
-  name: "transform-es2015-object-super",
+  name: "@babel/transform-object-super",
 }
 
 export const ES2015Parameters = {
-  name: "transform-es2015-parameters",
+  name: "@babel/transform-parameters",
 }
 
 export const shorthandProperty = {
-  name: "transform-es2015-shorthand-properties",
+  name: "@babel/transform-shorthand-properties",
 }
 
 export const spreadOperator = {
-  name: "transform-es2015-spread",
+  name: "@babel/transform-spread",
 }
 
 export const stickyRegex = {
-  name: "transform-es2015-sticky-regex",
+  name: "@babel/transform-sticky-regex",
 }
 
 export const templateLiterals = {
-  name: "transform-es2015-template-literals",
+  name: "@babel/transform-template-literals",
 }
 
 export const unicodeRegex = {
-  name: "transform-es2015-unicode-regex",
+  name: "@babel/transform-unicode-regex",
 }
 
 export const memberExpressionLiteral = {
-  name: "transform-es3-member-expression-literals",
+  name: "@babel/transform-member-expression-literals",
 }
 
 export const propertyLiteral = {
-  name: "transform-es3-property-literals",
+  name: "@babel/transform-property-literals",
 }
 
 export const propertyMutator = {
-  name: "transform-es5-property-mutators",
+  name: "@babel/transform-property-mutators",
 }
 
 export const exponentiationOperator = {
-  name: "transform-exponentiation-operator",
+  name: "@babel/transform-exponentiation-operator",
 }
 
 export const objectRestSpreadOperator = {
-  name: "transform-object-rest-spread",
+  name: "@babel/proposal-object-rest-spread",
 }
 
 export const regenerator = {
-  name: "transform-regenerator",
+  name: "@babel/transform-regenerator",
 }
 
 // module
-export const transformES2015ModuleCommonJS = {
-  name: "transform-es2015-modules-commonjs",
+export const transformModuleCommonJS = {
+  name: "@babel/transform-modules-commonjs",
 }
 
-export const transformES2015ModuleSystemJS = {
-  name: "transform-es2015-modules-systemjs",
-}
-
-export const transformGlobalSystemWrapper = {
-  name: "transform-global-system-wrapper",
-}
-
-export const transformAMDSystemWrapper = {
-  name: "transform-amd-system-wrapper",
+export const transformModuleSystemJS = {
+  name: "@babel/transform-modules-systemjs",
 }
 
 export const transformAsyncToGenerator = {
-  name: "transform-async-to-generator",
-}
-
-export const transformCommonJSSystemWrapper = {
-  name: "transform-cjs-system-wrapper",
+  name: "@babel/transform-async-to-generator",
 }
 
 // minification

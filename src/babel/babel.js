@@ -40,14 +40,7 @@ export const createConfig = (options) => {
   return {
     ...options,
     plugins: options.plugins.filter((plugin) => plugin.enabled).map((plugin) => {
-      // eslint-disable-next-line import/no-dynamic-require
-      // const pluginExports = require(`babel-plugin-${name}`) // I dont have to do this
-
-      return [
-        plugin.name,
-        // pluginExports && pluginExports.__esModule ? pluginExports.default : pluginExports,
-        plugin.settings,
-      ]
+      return [plugin.name, plugin.settings]
     }),
   }
 }

@@ -1,9 +1,7 @@
 import {
   arrowFunction,
-  asyncFunction,
   blockScopedFunction,
   blockScoping,
-  checkES2015Constant,
   classPlugin,
   computedProperty,
   destructuring,
@@ -27,8 +25,6 @@ import {
 } from "./plugins.js"
 
 const plugins = [
-  checkES2015Constant,
-  asyncFunction,
   arrowFunction,
   blockScopedFunction,
   blockScoping,

@@ -1,5 +1,4 @@
 package-lock.json
-.vscode
 dist
 
 __test__/dist
